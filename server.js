@@ -5,7 +5,7 @@ const { Pool } = require('pg');
 const pool = new Pool(
     {
       user: 'postgres',
-      password: 'password',
+      password: 'Lkec0202w5g!',
       host: 'localhost',
       database: 'work_db'
     },
@@ -74,7 +74,7 @@ function runInquirer() {
             } else if (answers.choice === 'Add an employee') {
                 pool.query('SELECT title, department_id FROM roles', (err, res) => {
                     if (err) throw err;
-                    //We pull the current roles from the data map and use map to make a new array of objects with the title and department_id
+                    //We pull the current roles from the database and use map to make a new array of objects with the title and department_id rows.
                     const roles = res.rows.map(role => ({ title: role.title, department_id: role.department_id }));
                     inquirer
                         .prompt([
@@ -145,7 +145,7 @@ function runInquirer() {
                                 type: 'list',
                                 name: 'employee_id',
                                 message: 'Select the employee:',
-                                //this is where the const we created above come into play. This way the user can choose from a list instead of having to know before hand.
+                                //this is where the const we created above come into play. This way the user can choose from a list instead of having to know the employee prior to the prompt.
                                 choices: employees
                             },
                             {
